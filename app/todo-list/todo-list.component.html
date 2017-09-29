@@ -1,0 +1,58 @@
+
+<ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+        <li [ngClass]="{disabled:pager.currentPage === 1}">
+            <a (click)="setPage(1)">First</a>
+        </li>
+        <li [ngClass]="{disabled:pager.currentPage === 1}">
+            <a (click)="setPage(pager.currentPage - 1)">Previous</a>
+        </li>
+        <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+            <a (click)="setPage(page)">{{page}}</a>
+        </li>
+        <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+            <a (click)="setPage(pager.currentPage + 1)">Next</a>
+        </li>
+        <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+            <a (click)="setPage(pager.totalPages)">Last</a>
+        </li>
+    </ul>
+<div class="list-outher">
+    <div class="node_info">
+        <div class="node_inner status" title="Статус"></div>
+        <div class="node_inner title">Тема</div>
+        <div class="node_inner name">Выполнил</div>
+        <div class="node_inner">Дата</div>
+        <div class="node_inner buttons">
+            Действия
+        </div>
+    </div>
+    <div class="outher_node" *ngFor="let node of pagedItems; let i = index" >
+        <div class="node" (click)="height(i)">
+            <div class="{{node.status}}"></div>
+            <div class="node_inner title">{{node.title }}</div>
+            <div class="node_inner name">{{node.username}}</div>
+            <div class="node_inner">{{node.date | date: 'dd/MM/yyyy'}}</div>
+            <div class="node_inner buttons">
+                <button class="blue" (click)="edit(node.id)" title="редактировать"></button>
+                <button class="red" (click)="del(node.id, pager.currentPage, $event)" title="удалить"></button>
+            </div>
+            <div class="node_inner detail"><span>Описание: </span>{{node.detail}}</div>
+
+            <div class="node_abso"><span>Задание выдал:</span> {{node.userset}}</div>
+            <div class="node_abso-2"><span>Времени потрачено:</span> {{node.usetime}} <span>ч.</span></div>
+        </div>
+    </div>
+</div>
+
+<div class="filters">
+        <div class="filter_title" (click)="filterAll()">Фильтры</div>
+        <select class="filter_input"  [(ngModel)]="filter.status" (ngModelChange)="filt()">
+            <option selected value="" >Все</option>
+            <option value="done" >Сделано</option>
+            <option value="performed">В процессе</option>
+            <option value="notstarted">Не начато</option>
+        </select>
+        <input type="text" class="filter_input" [(ngModel)]="filter.username" placeholder="Выполнил" (ngModelChange)="filt()">
+        <input type="text" class="filter_input" [(ngModel)]="filter.userset" placeholder="Выдал" (ngModelChange)="filt()">
+        <input type="number" class="filter_input" [(ngModel)]="filter.usetime" placeholder="Потрачено часов" (ngModelChange)="filt()">
+</div>

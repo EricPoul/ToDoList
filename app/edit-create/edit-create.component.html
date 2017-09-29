@@ -1,0 +1,41 @@
+
+<div class="edit_flex">
+    <div class="edit_outher">
+        <div class="in_row">
+            <span>Сделал:</span>
+            <input type="text" class="edit_input name" [ngModel]="node?.username" (ngModelChange)="node.username=$event" required>
+            <span>Задал:</span>
+            <input type="text" class="edit_input set" [ngModel]="node?.userset" (ngModelChange)="node.userset=$event" required>
+        </div>
+        <div class="in_row">
+            <span>Тема:</span>
+            <input type="text" class="edit_input title"  [ngModel]="node?.title" (ngModelChange)="node.title=$event" required>
+        </div>
+        <div class="in_row">
+            <textarea  [ngModel]="node?.detail" (ngModelChange)="node.detail=$event" placeholder="Описание" required></textarea>
+        </div>
+        <div class="in_row">
+            <span>Статус:</span>
+            <select class="edit_input status" [ngModel]="node?.status" (ngModelChange)="node.status=$event" required>
+                <option value="done">Сделано</option>
+                <option value="performed">В процессе</option>
+                <option value="notstarted">Не начато</option>
+            </select>
+            <span>Времени потрачено:</span>
+            <input type="number" class="edit_input time" [ngModel]="node?.usetime" (ngModelChange)="node.usetime=$event" required>
+            <span>Дата:</span>
+            <input type="date" class="edit_input date" value="{{ node?.date | date: 'yyyy-MM-dd' }}" [ngModel]="node?.date | date: 'yyyy-MM-dd'" (ngModelChange)="node.date=$event" required>
+            
+        </div>
+        <div class="in_row">
+            <button class="in_edit1" (click)="back($event)">Ко всему списку</button>
+            <button class="in_edit3" *ngIf="editPage" (click)="edit($event)">Редактировать</button>
+            <button class="{{nameButton.class}}" (click)="doFunc($event)">{{nameButton.name}}</button>
+            <span class="error"></span>
+        </div>
+    </div>
+</div>
+
+<div class="editr active" *ngIf="editPage">
+    <div class="editr_title">Редактирование</div>
+</div>
