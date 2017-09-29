@@ -35,8 +35,8 @@ export class NodesService {
         return todoListPromise.then(todolist => todolist.find(x => x.id == id));
     }
 
-    public editNode(node: Node, ids: number) {
-        todoListPromise.then(todolist => todolist[ids] = node);
+    public editNode(node: Node, id: number) {
+        todoListPromise.then(todolist => this.editId(todolist, id, node));
     }
 
     public addNode(node: Node){
@@ -51,6 +51,15 @@ export class NodesService {
         return todoListPromise.then(todolist => this.transform(todolist, filter));
     }
     
+    private editId(arr, id, node){
+        for(let i = 0; i<arr.length; i++){
+            if(arr[i].id == id){
+                arr[i] = node;
+            }
+        }
+        return arr
+    }
+
     private findId(arr, id){
         for(let i = 0; i<arr.length; i++){
             if(arr[i].id == id){

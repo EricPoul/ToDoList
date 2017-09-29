@@ -27,12 +27,12 @@ export class EditdetailsComponent implements OnInit {
     }
 
     back(){
-        this.nodesService.editNode( this.copynode ,this.copynode.id-1);
+        this.nodesService.editNode( this.copynode ,this.copynode.id);
         this.router.navigate(["todolist"])
     }
 
     edit(){
-        this.nodesService.editNode( this.node ,this.copynode.id-1);
+        this.nodesService.editNode( this.node ,this.copynode.id);
         this.router.navigate(["todolist"])
     }
 
